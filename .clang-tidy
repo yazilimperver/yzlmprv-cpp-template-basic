@@ -1,0 +1,19 @@
+---
+Checks: >
+  -*,
+  bugprone-*,
+  cert-*,
+  clang-analyzer-*,
+  concurrency-*,
+  misc-*,
+  performance-*,
+  portability-*,
+  readability-*,
+  -readability-isolate-declaration,
+  -readability-braces-around-statements,
+  -readability-identifier-length,
+  -readability-magic-numbers,
+  -misc-non-private-member-variables-in-classes,
+  -bugprone-easily-swappable-parameters,
+WarningsAsErrors: ""
+FormatStyle: none
