@@ -21,6 +21,19 @@
         }
       },
       {
+        "name": "base-msvc",
+        "hidden": true,
+        "displayName": "Visual Studio Base Configuration",
+        "description": "Default build using Ninja generator",
+        "generator": "Visual Studio 17 2022",
+        "binaryDir": "${sourceDir}/build/${presetName}",
+        "installDir": "${sourceDir}/install/${presetName}",
+        "cacheVariables": {
+            "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+            "BUILD_SHARED_LIBS": "FALSE"            
+        }
+      },
+      {
         "name": "debug",
         "hidden": true,
         "cacheVariables": {
@@ -67,7 +80,7 @@
           "name": "debug-msvc",
           "displayName": "Debug (MSVC)",
           "inherits": [
-              "base",
+              "base-msvc",
               "debug",
               "msvc"
           ]
@@ -94,7 +107,7 @@
           "name": "release-msvc",
           "displayName": "Release (MSVC)",
           "inherits": [
-              "base",
+              "base-msvc",
               "release",
               "msvc"
           ]
