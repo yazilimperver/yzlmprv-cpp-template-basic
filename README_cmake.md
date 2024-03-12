@@ -99,6 +99,7 @@ target_link_libraries(C PUBLIC/PRIVATE A)
 target_link_libraries(C PUBLIC/PRIVATE B)
 ```
 
+
 ### PUBLIC
 
 *PUBLIC* olarak işaretlenen satır için, eğer A fmt'yi implementasyonunda kullanıyorsa, fmt aynı zaman A'nın public API'sinde de kullanılıyor. Bu sebeple de, C'de fmt'yi kullanabilir.
@@ -115,6 +116,19 @@ target_include_directories(D INTERFACE {CMAKE_CURRENT_SOURCE_DIR}/include)
 ```
 
 Bu opsiyon genel olarak sadece başlık dosyasından oluşan kütüphaneler için kullanılmaktadır.
+
+.-----------.------------------.----------------.
+|           | Linked by target | Link interface |
+:-----------+------------------+----------------:
+| PUBLIC    |        X         |        X       |
+:-----------+------------------+----------------:
+| PRIVATE   |        X         |                |
+:-----------+------------------+----------------:
+| INTERFACE |                  |        X       |
+'-----------'------------------'----------------'
+
+Hedefe göre bağlı (Linked by target): Hedef kaynaklara dahil edilen kütüphaneler (kütüphaneyi bağlayan projelere bağımlılık değil).
+Bağlantı arayüzü (Link interface)   : Hedef genel başlık dosyalarında bulunan kütüphaneler (kütüphaneyi bağlayan projelere bağımlılıklar).
 
 ## Farklı Kütüphane Tipleri
 

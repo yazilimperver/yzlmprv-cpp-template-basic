@@ -24,7 +24,7 @@
         "name": "base-msvc",
         "hidden": true,
         "displayName": "Visual Studio Base Configuration",
-        "description": "Default build using Ninja generator",
+        "description": "Default build using Visual Studio generator",
         "generator": "Visual Studio 17 2022",
         "binaryDir": "${sourceDir}/build/${presetName}",
         "installDir": "${sourceDir}/install/${presetName}",
