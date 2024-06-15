@@ -1,0 +1,37 @@
+# Farklar için https://github.com/dandavison/delta kullanılabilir. Kurulumlar ilgili adreste mevcut
+[alias]
+	graph = log --oneline --graph --decorate
+	ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+	ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+	lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+	conflicts = diff --name-only --diff-filter=U
+	local-branches = !git branch -vv | cut -c 3- | awk '$3 !~/\\[/ { print $1 }'
+	recent-branches = !git branch --sort=-committerdate | head
+	authors = !git log --format='%aN <%aE>' | grep -v 'users.noreply.github.com' | sort -u --ignore-case
+	search = "!f() { git rev-list --all | xargs git grep -F \"$1\"; }; f"
+	dl = "!git ll -1" # Show modified files in last commit:latest commit
+	dlc = diff --cached HEAD^ # Show modified files in last commit:latest commit
+	dr  = "!f() { git diff "$1"^.."$1"; }; f" # git dr <commit-id> 
+		lc  = "!f() { git ll "$1"^.."$1"; }; f" # git lc <commit-id> # show modified files in <commit-id>
+		f = "!git ls-files | grep -i" # git f <filename> # search <filename> in all files
+	bb = !/Users/davidlee/.dotfiles/scripts/better-branch.sh
+	fza = "!git ls-files -m -o --exclude-standard | fzf -m --print0 | xargs -0 git add"
+
+[core]
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true    # use n and N to move between diff sections
+	# VS Code Kullanımı İçin: hyperlinks-file-link-format = "vscode://file/{path}:{line}"
+    # delta detects terminal colors automatically; set one of these to disable auto-detection
+    # dark = true
+    # light = true
+
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    colorMoved = default

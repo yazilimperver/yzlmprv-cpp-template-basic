@@ -32,6 +32,8 @@ C++ projeleriniz için kullanabileceğiniz temel bir şablon reposudur. Bu repo 
 │       └── test_function_lib.cpp
 ├── cmake
 │   └── cmake modülleri
+├── gitconfigs
+│   └── Kullanılabilecek örnek git konfigürasyon ayarlar/alias'lar
 
 ```
 

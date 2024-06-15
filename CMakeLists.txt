@@ -22,6 +22,28 @@ project(
 include(TargetOSSetup)
 include(CompilerOptions)
 
+# CCache'e yonelik ekleme
+find_program(ccache_exe ccache) 
+
+if(ccache_exe )
+    message("CCACHE is found")
+    set_property(GLOBAL PROPERTY RULE_LAUNCH_COMPILE ccache)
+    set_property(GLOBAL PROPERTY RULE_LAUNCH_LINK ccache)
+
+    # CCache icin windows debug ve RelWithDebugInfo ayarlar
+    if (MSVC)
+        foreach(config DEBUG RELWITHDEBINFO)
+            foreach(lang C CXX)
+                set(flags_var "CMAKE_${lang}_FLAGS_${config}")
+                string(REPLACE "/Zi" "/Z7" ${flags_var} "${${flags_var}}")
+                set(${flags_var} "${${flags_var}}")
+            endforeach()
+        endforeach()
+    endif()
+else(ccache_exe )
+    message("CCACHE is NOT found")
+endif(ccache_exe )
+
 # compile_commands.json dosyasi olusturma kabiliyeti eklenir
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
