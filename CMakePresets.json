@@ -95,6 +95,15 @@
           ]
       },
       {
+          "name": "release-gcc",
+          "displayName": "Release (GCC)",
+          "inherits": [
+              "base",
+              "release",
+              "gcc"
+          ]
+      },
+      {
           "name": "debug-clang",
           "displayName": "Debug (CLANG)",
           "inherits": [
@@ -113,15 +122,6 @@
           ]
       },
       {
-          "name": "release-gcc",
-          "displayName": "Release (GCC)",
-          "inherits": [
-              "base",
-              "release",
-              "gcc"
-          ]
-      },
-      {
           "name": "release-clang",
           "displayName": "Release (CLANG)",
           "inherits": [
@@ -133,34 +133,20 @@
     ],
     "buildPresets": [
         {
-            "name": "debug",
+            "name": "build-debug-gcc",
             "configurePreset": "debug-gcc"
         },
         {
-            "name": "release",
+            "name": "build-release-gcc",
             "configurePreset": "release-gcc"
-        },{
-            "name": "debug-msvc",
+        },
+        {
+            "name": "build-debug-msvc",
             "configurePreset": "debug-msvc"
         },
         {
-            "name": "release-msvc",
+            "name": "build-release-msvc",
             "configurePreset": "release-msvc"
-        },
-        {
-            "name": "clang-tidy",
-            "inherits": "debug",
-            "targets": [ "clang-tidy" ]
-        }
-    ],
-    "testPresets": [
-        {
-            "name": "debug",
-            "configurePreset": "debug-gcc"
-        },
-        {
-            "name": "release",
-            "configurePreset": "release-gcc"
         }
     ]
   }
