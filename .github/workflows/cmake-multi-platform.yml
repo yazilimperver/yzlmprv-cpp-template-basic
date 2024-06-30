@@ -51,6 +51,11 @@ jobs:
       run: |
         echo "Yazilimperver Github Actions started from Linux!"    
 
+    - name: Linux Dependencies
+      if: runner.os == 'Linux'
+      run: |
+        sudo apt install clang-tidy -y    
+
     - name: Download Ninja and CMake
       shell: cmake -P {0}
       run: |
@@ -142,6 +147,28 @@ jobs:
         restore-keys: |
           ${{ matrix.config.name }}-ccache-
 
+    - name: CMake Release Configuration
+      id: CMake-Release
+      run: |
+        if ("${{ runner.os }}" STREQUAL "Windows")
+          cmake --preset release-msvc
+          cmake --build --preset release-msvc
+
+        elseif ("${{ runner.os }}" STREQUAL "Linux")
+          cmake --preset release-gcc
+          cmake --build --preset release
+
+    - name: CMake Debug Configuration
+      id: CMake-Debug
+      run: |
+        if ("${{ runner.os }}" STREQUAL "Windows")
+          cmake --preset debug-msvc
+          cmake --build --preset debug-msvc
+
+        elseif ("${{ runner.os }}" STREQUAL "Linux")
+          cmake --preset debug-gcc
+          cmake --build --preset debug
+    
     # - name: Configure CMake
     #   # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
     #   # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
