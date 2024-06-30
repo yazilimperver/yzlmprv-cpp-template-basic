@@ -41,6 +41,16 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Greeting-Windows
+      if: runner.os == 'Windows'
+      run: |
+        echo "Yazilimperver Github Actions started from Windows!"
+
+    - name: Greeting-Linux
+      if: runner.os == 'Linux'
+      run: |
+        echo "Yazilimperver Github Actions started from Linux!"    
+
     - name: Download Ninja and CMake
       shell: cmake -P {0}
       run: |
