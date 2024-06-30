@@ -1,6 +1,11 @@
 name: Yazilimperver CMake Multiplatform Github Actions Template
 
-on: [push, pull_request]
+on: 
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - '**/**.md'
 
 env:
   CMAKE_VERSION: "3.29.6"
