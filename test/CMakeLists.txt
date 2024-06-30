@@ -16,16 +16,10 @@ set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 enable_testing()
 
 # Test projesi
-add_executable(${TEST_TARGET_NAME} "")
+add_executable(${TEST_TARGET_NAME} "src/test_function_lib.cpp")
 
 # GoogleTest icin en az C++14
 target_compile_features(${TEST_TARGET_NAME} PUBLIC cxx_std_11)
-
-# Test dosyalari
-target_sources(${TEST_TARGET_NAME}
-    PRIVATE
-        "src/test_function_lib.cpp"
-)
 
 target_link_libraries(${TEST_TARGET_NAME} 
     GTest::gtest_main 

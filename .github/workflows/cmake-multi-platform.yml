@@ -132,30 +132,15 @@ jobs:
           execute_process(COMMAND chmod +x ${ccache_dir}/ccache)
         endif()
 
-    - name: Prepare ccache timestamp
-      id: ccache_cache_timestamp
-      shell: cmake -P {0}
-      run: |
-        string(TIMESTAMP current_date "%Y-%m-%d-%H;%M;%S" UTC)
-        file(APPEND "$ENV{GITHUB_OUTPUT}" "timestamp=${current_date}")
-
-    - name: ccache cache files
-      uses: actions/cache@v4
-      with:
-        path: .ccache
-        key: ${{ matrix.config.name }}-ccache-${{ steps.ccache_cache_timestamp.outputs.timestamp }}
-        restore-keys: |
-          ${{ matrix.config.name }}-ccache-
-
     - name: CMake Release Configuration
       id: CMake-Release
       run: |
         if [ "$RUNNER_OS" == "Windows" ]; then
           cmake --preset release-msvc
-          cmake --build --preset release-msvc
+          cmake --build --preset build-release-msvc
         elif [ "$RUNNER_OS" == "Linux" ]; then
           cmake --preset release-gcc
-          cmake --build --preset release
+          cmake --build --preset build-release-gcc
         fi
       shell: bash
 
@@ -164,12 +149,24 @@ jobs:
       run: |
         if [ "$RUNNER_OS" == "Windows" ]; then
           cmake --preset debug-msvc
-          cmake --build --preset debug-msvc
+          cmake --build --preset build-debug-msvc
         elif [ "$RUNNER_OS" == "Linux" ]; then
           cmake --preset debug-gcc
-          cmake --build --preset debug
+          cmake --build --preset build-debug-gcc
         fi
       shell: bash
+
+    - name: CTest Configuration
+      run: |
+        echo "Discovered CTests Execution"  
+        if [ "$RUNNER_OS" == "Windows" ]; then
+          scripts/runTests.bat
+        elif [ "$RUNNER_OS" == "Linux" ]; then
+          scripts/runTests.sh
+        fi
+      shell: bash 
+    
+    # Diger olasi cmake kullanimlari
     # - name: Configure CMake
     #   # Configure CMake in a 'build' subdirectory. `CMAKE_BUILD_TYPE` is only required if you are using a single-configuration generator such as make.
     #   # See https://cmake.org/cmake/help/latest/variable/CMAKE_BUILD_TYPE.html?highlight=cmake_build_type
