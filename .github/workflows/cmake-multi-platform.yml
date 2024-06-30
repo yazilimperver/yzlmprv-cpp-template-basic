@@ -150,22 +150,20 @@ jobs:
     - name: CMake Release Configuration
       id: CMake-Release
       run: |
-        if ("${{ runner.os }}" STREQUAL "Windows")
+        if [ "$RUNNER_OS" == "Windows" ]; then
           cmake --preset release-msvc
           cmake --build --preset release-msvc
-
-        elseif ("${{ runner.os }}" STREQUAL "Linux")
+        elif [ "$RUNNER_OS" == "Linux" ]; then
           cmake --preset release-gcc
           cmake --build --preset release
 
     - name: CMake Debug Configuration
       id: CMake-Debug
       run: |
-        if ("${{ runner.os }}" STREQUAL "Windows")
+        if [ "$RUNNER_OS" == "Windows" ]; then
           cmake --preset debug-msvc
           cmake --build --preset debug-msvc
-
-        elseif ("${{ runner.os }}" STREQUAL "Linux")
+        elif [ "$RUNNER_OS" == "Linux" ]; then
           cmake --preset debug-gcc
           cmake --build --preset debug
     
