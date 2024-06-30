@@ -34,7 +34,8 @@ C++ projeleriniz için kullanabileceğiniz temel bir şablon reposudur. Bu repo 
 │   └── cmake modülleri
 ├── gitconfigs
 │   └── Kullanılabilecek örnek git konfigürasyon ayarlar/alias'lar
-
+├── .github
+│   └── workflows : Github action betikleri
 ```
 
 Kütüphane kodları [lib/](lib/), ana uygulama kodları [app/](app) ve testler de [tests/](tests/) dizinlerinde. Bunların yanında uygulamaları oluşturmak için de [scripts/](scripts) dizini içerisinde betikler bulunmaktadır.
@@ -63,9 +64,10 @@ scripts/list_presets.sh
     "release-gcc"   - Release (GCC)
     "release-clang" - Release (CLANG)
   - Oluşturma presetleri:
-    "debug"
-    "release"
-    "clang-tidy"
+    "build-debug-gcc"
+    "build-release-gcc"
+    "build-debug-msvc"
+    "build-release-msvc"
 ```
 
 - Uygulamayı Oluşturup/Derlemek için:
@@ -78,8 +80,8 @@ scripts/build.bat  // Windows
 - Birim Testler İçin (herhangi bir debug preseti ile yazılımı oluşturup testler koşturulabilir). g++-debug için:
 
 ```shell
-scripts/build.sh
-scripts/run_tests.sh
+scripts/build.sh Debug
+scripts/runTests.sh
 ```
 - Ya da ilgili presete özel konfigürasyon girilebilir
 ```shell
